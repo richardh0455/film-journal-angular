@@ -1,0 +1,31 @@
+<p>shots works!</p>
+
+<table border="1">
+  <colgroup>
+    <col span="1" style="width: 30%;">
+    <col span="1" style="width: 10%;">
+    <col span="1" style="width: 10%;">
+    <col span="1" style="width: 10%;">
+    <col span="1" style="width: 10%;">
+    <col span="1" style="width: 10%;">
+  </colgroup>
+  <tbody>
+    <th>Date/Time</th>
+    <th>Description</th>
+    <th>Aperture</th>
+    <th>Shutter Speed</th>
+    <th>Lighting</th>
+    <th>Lens</th>
+
+  <tr *ngFor="let shot of shots; index as i">
+    <td>{{shot.date_time}}</td>
+    <td>{{shot.description}}</td>
+    <td>{{shot.aperture}}</td>
+    <td>{{shot.shutter_speed}}</td>
+    <td>{{shot.lighting}}</td>
+    <td>{{shot.lens.width}}</td>
+
+  </tr>
+  <!-- . . . -->
+  </tbody>
+<table>
