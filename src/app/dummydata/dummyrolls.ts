@@ -13,7 +13,7 @@ export const rolls = [
     manufacturer: 'Kodak',
     brand: 'Colorplus',
     iso: '200',
-    camera_id: '1',
+    camera_id: '2',
     width: '35mm',
     date_loaded: '2019-12-26'
   },

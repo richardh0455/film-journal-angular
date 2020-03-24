@@ -1,22 +1,17 @@
-<p>rolls works!</p>
-
-<div *ngFor="let roll of rolls; index as i">
+<div *ngFor="let camera of cameras; index as i">
 
   <h3>
-    <a [title]="roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded" [routerLink]="['/rolls', roll.id]">
-      {{roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded}}
-    </a>
+      {{camera.manufacturer + ' ' + camera.brand + ' ' + camera.model_number}}
   </h3>
+  <div *ngFor="let roll of rolls; index as i">
+    <ng-container *ngIf="roll.camera_id === camera.id">
+      <a [title]="roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded" [routerLink]="['/rolls', roll.id]">
+        {{roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded}}
+      </a>
+    </ng-container>
+  </div>
 
-  <ul>
-    <li ng-repeat="(key, value) in rolls | groupBy: 'camera.model_number'">
-      Group name: {{ key }}
-      <ul>
-        <li ng-repeat="roll in value">
-          Roll: {{roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded}}
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <!-- . . . -->
+</div>
+<div>
+<a [routerLink]="['/rolls/new']">Add Roll</a>
 </div>

@@ -6,6 +6,6 @@ export interface Roll {
   brand: string;
   iso: number;
   width: string;
-  camera: Camera;
+  camera_id: number;
   date_loaded: Date;
 }
