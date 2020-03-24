@@ -16,7 +16,7 @@ export class NewRollComponent implements OnInit {
   cameras: Camera[];
   newRollForm;
   constructor(private rollService: RollService, private cameraService: CameraService, private formBuilder: FormBuilder) {
-    this.rolls =  this.rollService.getRolls() as Roll[];
+    this.rolls =  this.getRollsDateSorted() as Roll[];
     this.cameras = this.cameraService.getCameras() as Camera[];
 
     this.newRollForm = this.formBuilder.group({
@@ -31,6 +31,11 @@ export class NewRollComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  getRollsDateSorted()
+  {
+    return this.rollService.getRolls().sort((a, b) => b.date_loaded - a.date_loaded)
   }
 
   changeSelectedCamera(camera)
@@ -52,6 +57,18 @@ export class NewRollComponent implements OnInit {
     this.newRollForm.reset();
 
     console.log('Your order has been submitted', rollData);
+    var roll = {
+      manufacturer: rollData.manufacturer,
+      brand: rollData.brand,
+      width: rollData.width,
+      iso: Number(rollData.iso),
+      camera_id: Number(rollData.camera.id),
+      date_loaded: new Date(rollData.date_loaded)
+    } as Roll;
+
+    this.rollService.addRoll(roll);
+    this.rolls = this.getRollsDateSorted();
+
   }
 
 }

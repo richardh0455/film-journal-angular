@@ -23,8 +23,9 @@ export class RollService {
   }
 
   addRoll(roll : Roll){
+    var id = Math.max.apply(Math, this.getRolls().map(function(roll) { return roll.id; })) + 1;
     rolls.push({
-      id: String(roll.id),
+      id: id,
       manufacturer: roll.manufacturer,
       brand: roll.brand,
       width: roll.width,
@@ -32,5 +33,7 @@ export class RollService {
       camera_id: String(roll.camera_id),
       date_loaded: String(roll.date_loaded)
     });
+    console.log("Rolls in DB:")
+    console.log(this.getRolls());
   }
 }
