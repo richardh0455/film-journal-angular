@@ -1,0 +1,61 @@
+<p>new-roll works!</p>
+
+
+<form [formGroup]="newRollForm" (ngSubmit)="onSubmit(newRollForm.value)">
+  <div>
+    <label for="manufacturer">
+      Manufacturer
+    </label>
+    <input id="manufacturer" type="text" formControlName="manufacturer">
+  </div>
+
+  <div>
+    <label for="brand">
+      Brand
+    </label>
+    <input id="brand" type="text" formControlName="brand">
+  </div>
+
+  <div>
+    <label for="iso">
+      ISO
+    </label>
+    <input id="iso" type="number" formControlName="iso">
+  </div>
+
+  <div>
+    <label for="width">
+      Width
+    </label>
+    <input id="width" type="text" formControlName="width">
+  </div>
+
+  <div>
+    <label for="date_loaded">
+      Select Camera
+    </label>
+  <select formControlName="camera">
+      <option value="">Select Camera</option>
+      <option *ngFor="let camera of cameras" [ngValue]="camera" (change)="changeSelectedCamera(camera)">{{camera.manufacturer + ' '+ camera.brand + ' ' + camera.model_number}}
+      </option>
+   </select>
+   </div>
+
+   <div>
+     <label for="date_loaded">
+       Date Loaded
+     </label>
+     <input id="date_loaded" type="date" formControlName="date_loaded">
+   </div>
+
+  <button class="button" type="submit">Add New Roll</button>
+
+</form>
+
+
+<h3>Roll History</h3>
+<div *ngFor="let roll of rolls; index as i">
+    <a [title]="roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded" (click)="loadPreviousRoll(roll)">
+      {{roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded.toLocaleString('en-NZ')}}
+    </a>
+</div>
