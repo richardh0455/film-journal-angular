@@ -1,0 +1,68 @@
+<p>new-shot works!</p>
+
+
+<form [formGroup]="newShotForm" (ngSubmit)="onSubmit(newShotForm.value)">
+  <div>
+    <label for="aperture">
+      Aperture
+    </label>
+    <input id="aperture" type="number" formControlName="aperture">
+  </div>
+
+  <div>
+    <label for="shutter_speed">
+      Shutter Speed
+    </label>
+    <input id="shutter_speed" type="number" formControlName="shutter_speed">
+  </div>
+
+  <div>
+    <label for="lighting">
+      Lighting
+    </label>
+    <input id="lighting" type="text" formControlName="lighting">
+  </div>
+
+  <div>
+    <label for="date_time">
+      Date/Time
+    </label>
+    <input id="date_time" type="date" formControlName="date_time">
+  </div>
+
+  <div>
+    <label for="location">
+      Location
+    </label>
+    <input id="location" type="text" formControlName="location">
+   </div>
+
+   <div>
+     <label for="description">
+       Description
+     </label>
+     <input id="description" type="text" formControlName="description">
+   </div>
+
+   <div>
+     <label for="lens">
+       Select Lens
+     </label>
+   <select formControlName="lens">
+       <option value="">Select Lens</option>
+       <option *ngFor="let lens of lenses" [ngValue]="lens" (change)="changeSelectedLens(lens)">{{lens.manufacturer + ' '+ lens.width + ' ' + lens.aperture}}
+       </option>
+    </select>
+    </div>
+
+  <button class="button" type="submit">Add New Shot</button>
+
+</form>
+
+
+<h3>Shot History</h3>
+<div *ngFor="let shot of shots; index as i">
+    <a [title]="shot.aperture + ' ' + shot.shutter_speed + ' ' + shot.lighting + ' ' + shot.date_time" (click)="loadPreviousShot(shot)">
+      {{shot.aperture + ' ' + shot.shutter_speed + ' ' + shot.lighting+ ' ' + shot.date_time.toLocaleString('en-NZ')}}
+    </a>
+</div>

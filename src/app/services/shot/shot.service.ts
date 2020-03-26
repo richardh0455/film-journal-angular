@@ -18,7 +18,24 @@ export class ShotService {
       date_time: new Date(shot.date_time),
       location: shot.location,
       description: shot.description,
-      lens: this.lensService.getLens(Number(shot.lens_id)),
+      lens_id: Number(shot.lens_id),
     }) as Shot);
+  }
+
+  addShot(shot : Shot){
+    var id = Math.max.apply(Math, this.getShots().map(function(shot) { return shot.id; })) + 1;
+    shots.push({
+      id: String(id),
+      roll_id: String(shot.roll_id),
+      aperture: String(shot.aperture),
+      shutter_speed: String(shot.shutter_speed),
+      lighting: shot.lighting,
+      date_time: String(shot.date_time),
+      location: shot.location,
+      description: shot.description,
+      lens_id: String(shot.lens_id),
+    });
+    console.log("Shots in DB:")
+    console.log(this.getShots());
   }
 }

@@ -7,13 +7,15 @@ import { AppComponent } from './components/app/app.component';
 import { RollsComponent } from './components/rolls/rolls.component';
 import { ShotsComponent } from './components/shots/shots.component';
 import { NewRollComponent } from './components/rolls/new-roll/new-roll.component';
+import { NewShotComponent } from './components/shots/new-shot/new-shot.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RollsComponent,
     ShotsComponent,
-    NewRollComponent
+    NewRollComponent,
+    NewShotComponent
   ],
   imports: [
     BrowserModule,

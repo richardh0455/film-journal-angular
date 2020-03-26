@@ -9,5 +9,5 @@ export interface Shot {
   date_time: Date;
   location: string;
   description: string;
-  lens: Lens;
+  lens_id: number;
 }
