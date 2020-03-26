@@ -4,6 +4,7 @@ import {ShotService} from '../../../services/shot/shot.service';
 import {LensService} from '../../../services/lens/lens.service';
 import { FormBuilder, ReactiveFormsModule   } from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {Lens} from '../../../interfaces/lens';
 
 @Component({
   selector: 'app-new-shot',

@@ -58,11 +58,3 @@
   <button class="button" type="submit">Add New Shot</button>
 
 </form>
-
-
-<h3>Shot History</h3>
-<div *ngFor="let shot of shots; index as i">
-    <a [title]="shot.aperture + ' ' + shot.shutter_speed + ' ' + shot.lighting + ' ' + shot.date_time" (click)="loadPreviousShot(shot)">
-      {{shot.aperture + ' ' + shot.shutter_speed + ' ' + shot.lighting+ ' ' + shot.date_time.toLocaleString('en-NZ')}}
-    </a>
-</div>

@@ -35,7 +35,7 @@ export class NewRollComponent implements OnInit {
 
   getRollsDateSorted()
   {
-    return this.rollService.getRolls().sort((a, b) => b.date_loaded - a.date_loaded)
+    return this.rollService.getRolls().sort((a, b) => b.date_loaded.getTime() - a.date_loaded.getTime())
   }
 
   changeSelectedCamera(camera)
