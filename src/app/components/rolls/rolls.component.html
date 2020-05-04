@@ -4,7 +4,7 @@
       {{camera.manufacturer + ' ' + camera.brand + ' ' + camera.model_number}}
   </h3>
   <div *ngFor="let roll of rolls; index as i">
-    <ng-container *ngIf="roll.camera_id === camera.id">
+    <ng-container *ngIf="roll.loaded_camera_id === camera.id">
       <a [title]="roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded" [routerLink]="['/rolls', roll.id]">
         {{roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded}}
       </a>

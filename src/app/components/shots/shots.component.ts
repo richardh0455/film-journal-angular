@@ -12,16 +12,21 @@ import {Lens} from '../../interfaces/lens';
 })
 export class ShotsComponent implements OnInit {
   shots: Shot[];
-  rollId;
+  rollId: string;
   lenses: Lens[];
   constructor(private route: ActivatedRoute, private shotService: ShotService, private lensService: LensService) { }
 
   ngOnInit(): void {
-    this.lenses = this.lensService.getLenses();
+    this.lensService.getLenses().subscribe((lenses : Lens[]) => {
+      this.lenses = lenses;
+    });
     this.route.paramMap.subscribe(params => {
-      this.rollId = +params.get('rollID');
-      this.shots =  this.shotService.getShots().filter(x => x.roll_id === this.rollId);
-      this.shots.forEach(shot => shot["lens"] = this.lenses.find(lens => lens.id === shot.lens_id));
+      this.rollId = params.get('rollID');
+      console.log("Roll ID: "+this.rollId);
+      this.shotService.getShots(this.rollId).subscribe((data : Shot[]) => {
+        this.shots = data;
+        this.shots.forEach(shot => shot["lens"] = this.lenses.find(lens => lens.id === shot.lens_id));
+      });
 
     });
   }

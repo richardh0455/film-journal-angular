@@ -13,8 +13,13 @@ export class RollsComponent implements OnInit {
   rolls: Roll[];
   cameras: Camera[];
   constructor(private rollService: RollService, private cameraService: CameraService) {
-    this.rolls =  this.rollService.getRolls() as Roll[];
-    this.cameras = this.cameraService.getCameras() as Camera[];
+    this.rollService.getRolls().subscribe((data: Roll[]) => {
+      this.rolls = data;
+    });
+    this.cameraService.getCameras().subscribe((data: Camera[]) => {
+      this.cameras = data;
+    });
+
   }
 
   ngOnInit(): void {

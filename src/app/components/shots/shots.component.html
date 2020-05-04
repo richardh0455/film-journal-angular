@@ -18,7 +18,7 @@
     <th>Lens</th>
 
   <tr *ngFor="let shot of shots; index as i">
-    <td>{{shot.date_time}}</td>
+    <td>{{shot.date_time._seconds * 1000 | date:'MM-dd-yyyy HH:mm' }}</td>
     <td>{{shot.description}}</td>
     <td>{{shot.aperture}}</td>
     <td>{{shot.shutter_speed}}</td>

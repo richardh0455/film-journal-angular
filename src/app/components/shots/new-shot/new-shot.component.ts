@@ -16,7 +16,9 @@ export class NewShotComponent implements OnInit {
   newShotForm;
   lenses : Lens[];
   constructor(private route: ActivatedRoute, private shotService: ShotService, private lensService: LensService, private formBuilder: FormBuilder) {
-    this.lenses = this.lensService.getLenses();
+    this.lensService.getLenses().subscribe((lenses : Lens[]) => {
+      this.lenses = lenses;
+    });
 
     this.newShotForm = this.formBuilder.group({
       aperture: '',

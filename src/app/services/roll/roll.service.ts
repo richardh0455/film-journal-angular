@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import {rolls} from '../../dummydata/dummyrolls';
 import {Roll} from '../../interfaces/roll';
-import {CameraService} from '../camera/camera.service';
+import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { environment } from './../../../environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RollService {
 
-  constructor(private cameraService: CameraService) { }
+  constructor(private http: HttpClient) { }
 
-  getRolls(): Roll[] {
-    return rolls.map(roll => ({
-      id: Number(roll.id),
-      manufacturer: roll.manufacturer,
-      brand: roll.brand,
-      width: roll.width,
-      iso: Number(roll.iso),
-      camera_id: Number(roll.camera_id),
-      date_loaded: new Date(roll.date_loaded)
-    }) as Roll);
+  getRolls(): Observable<Roll[]> {
+    return this.http.get<Roll[]>(environment.apiURL+"/rolls");
   }
 
   addRoll(roll : Roll){
-    var id = Math.max.apply(Math, this.getRolls().map(function(roll) { return roll.id; })) + 1;
+    /*var id = Math.max.apply(Math, this.getRolls().map(function(roll) { return roll.id; })) + 1;
     rolls.push({
       id: id,
       manufacturer: roll.manufacturer,
@@ -34,6 +30,6 @@ export class RollService {
       date_loaded: String(roll.date_loaded)
     });
     console.log("Rolls in DB:")
-    console.log(this.getRolls());
+    console.log(this.getRolls());*/
   }
 }
