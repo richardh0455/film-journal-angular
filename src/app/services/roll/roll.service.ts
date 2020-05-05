@@ -18,7 +18,8 @@ export class RollService {
     return this.http.get<Roll[]>(environment.apiURL+"/rolls");
   }
 
-  addRoll(roll : Roll){
+  addRoll(roll : Roll): Observable {
+    return this.http.post(environment.apiURL+"/rolls", roll);
     /*var id = Math.max.apply(Math, this.getRolls().map(function(roll) { return roll.id; })) + 1;
     rolls.push({
       id: id,

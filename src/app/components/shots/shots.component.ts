@@ -17,15 +17,21 @@ export class ShotsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private shotService: ShotService, private lensService: LensService) { }
 
   ngOnInit(): void {
-    this.lensService.getLenses().subscribe((lenses : Lens[]) => {
-      this.lenses = lenses;
-    });
+
     this.route.paramMap.subscribe(params => {
       this.rollId = params.get('rollID');
       console.log("Roll ID: "+this.rollId);
       this.shotService.getShots(this.rollId).subscribe((data : Shot[]) => {
         this.shots = data;
-        this.shots.forEach(shot => shot["lens"] = this.lenses.find(lens => lens.id === shot.lens_id));
+        this.shots.forEach(shot => {
+          var date = new Date(shot.date_time);
+          shot.date_time = typeof(date) !== "undefined" ? date.toLocaleDateString("en-NZ") : '';
+        });
+        this.lensService.getLenses().subscribe((lenses : Lens[]) => {
+          this.lenses = lenses;
+          this.shots.forEach(shot => shot["lens"] = this.lenses.find(lens => lens.id === shot.lens_id));
+        });
+
       });
 
     });
