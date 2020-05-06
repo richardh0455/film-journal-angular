@@ -33,8 +33,7 @@ export class NewShotComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.rollId = +params.get('rollID');
-      //this.shots =  this.shotService.getShots().filter(x => x.roll_id === this.rollId) as Shot[];
+      this.rollId = params.get('rollID');
     });
   }
 
@@ -48,7 +47,6 @@ export class NewShotComponent implements OnInit {
 
   onSubmit(shotData) {
     this.newShotForm.reset();
-    console.log('Your order has been submitted', shotData);
     var shot = {
       roll_id: this.rollId,
       aperture: Number(shotData.aperture),
@@ -59,23 +57,12 @@ export class NewShotComponent implements OnInit {
       description: shotData.description,
       lens_id: shotData.lens.id
     } as Shot;
-    this.shotService.addShot(shot);
-    //this.shots = this.getRollsDateSorted();
+    this.shotService.addShot(shot).subscribe((res) => {
+      if(res.id && res.id !== null && res.id !== "")
+      {
+        console.log("Shot Added Successfully");
+      }
+    });
   }
 
 }
-
-
-/*
-id: '1',
-roll_id: '2',
-aperture: '1.8',
-shutter_speed: '350',
-lighting: 'dusk',
-date_time: '2020-03-17T15:45:00',
-location: '-36.844805199999996, 174.7542183',
-description: 'Eleanor on the Porch',
-lens_id: '1'
-
-
-*/

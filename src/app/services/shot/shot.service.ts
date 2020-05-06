@@ -18,7 +18,8 @@ export class ShotService {
     return this.http.get<Shot[]>(environment.apiURL+"/shots", {params: params});
   }
 
-  addShot(shot : Shot){
+  addShot(shot : Shot): Observable {
+    return this.http.post(environment.apiURL+"/shots", shot);
     /*var id = Math.max.apply(Math, this.getShots().map(function(shot) { return shot.id; })) + 1;
     shots.push({
       id: String(id),

@@ -75,7 +75,7 @@ export class NewRollComponent implements OnInit {
         console.log("Roll Added Successfully");
       }
       this.getRollsDateSorted();
-    });;
+    });
 
 
   }

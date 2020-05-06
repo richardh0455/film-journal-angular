@@ -14,6 +14,10 @@ export class RollsComponent implements OnInit {
   cameras: Camera[];
   constructor(private rollService: RollService, private cameraService: CameraService) {
     this.rollService.getRolls().subscribe((data: Roll[]) => {
+      data.forEach(roll => {
+        var date = new Date(roll.date_loaded);
+        roll.formatted_date_loaded = typeof(date) !== "undefined" ? date.toLocaleDateString("en-NZ") : '';
+      });
       this.rolls = data;
     });
     this.cameraService.getCameras().subscribe((data: Camera[]) => {

@@ -20,12 +20,12 @@ export class ShotsComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.rollId = params.get('rollID');
-      console.log("Roll ID: "+this.rollId);
       this.shotService.getShots(this.rollId).subscribe((data : Shot[]) => {
         this.shots = data;
         this.shots.forEach(shot => {
+          shot.lens = {};
           var date = new Date(shot.date_time);
-          shot.date_time = typeof(date) !== "undefined" ? date.toLocaleDateString("en-NZ") : '';
+          shot.formatted_date_time = typeof(date) !== "undefined" ? date.toLocaleDateString("en-NZ") : '';
         });
         this.lensService.getLenses().subscribe((lenses : Lens[]) => {
           this.lenses = lenses;

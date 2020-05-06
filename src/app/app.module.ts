@@ -9,6 +9,8 @@ import { RollsComponent } from './components/rolls/rolls.component';
 import { ShotsComponent } from './components/shots/shots.component';
 import { NewRollComponent } from './components/rolls/new-roll/new-roll.component';
 import { NewShotComponent } from './components/shots/new-shot/new-shot.component';
+import { NewCameraComponent } from './components/new-camera/new-camera.component';
+import { NewLensComponent } from './components/new-lens/new-lens.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { NewShotComponent } from './components/shots/new-shot/new-shot.component
     RollsComponent,
     ShotsComponent,
     NewRollComponent,
-    NewShotComponent
+    NewShotComponent,
+    NewCameraComponent,
+    NewLensComponent
   ],
   imports: [
     BrowserModule,

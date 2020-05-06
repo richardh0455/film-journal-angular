@@ -21,4 +21,8 @@ export class LensService {
   getLens(lensId: number): Observable<Lens> {
     return this.http.get<Lens>(environment.apiURL+`/lenses/${lensId}`);
   }
+
+  addLens(lens : Lens): Observable {
+    return this.http.post(environment.apiURL+"/lenses", lens);
+  }
 }
