@@ -6,6 +6,4 @@ export interface Camera {
   lens_mounting: string;
   film: string;
   style: string;
-  loaded_roll_id: string;
-  mounted_lens_id: string;
 }

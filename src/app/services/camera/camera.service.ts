@@ -20,4 +20,8 @@ export class CameraService {
   getCamera(cameraID: number): Observable<Camera> {
     return this.http.get<Camera>(environment.apiURL+`/cameras/${cameraID}`);
   }
+
+  addCamera(camera : Camera): Observable {
+    return this.http.post(environment.apiURL+"/cameras", camera);
+  }
 }
