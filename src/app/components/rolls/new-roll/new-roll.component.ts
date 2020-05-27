@@ -16,8 +16,8 @@ export class NewRollComponent implements OnInit {
   cameras: Camera[];
   newRollForm;
   constructor(private rollService: RollService, private cameraService: CameraService, private formBuilder: FormBuilder) {
-    this.rolls =  this.getRollsDateSorted() as Roll[];
-    this.cameras = this.cameraService.getCameras() as Camera[];
+    this.getRollsDateSorted();
+    this.cameraService.getCameras().subscribe((data: Camera[]) => this.cameras = data);
 
     this.newRollForm = this.formBuilder.group({
       manufacturer: '',
@@ -35,7 +35,10 @@ export class NewRollComponent implements OnInit {
 
   getRollsDateSorted()
   {
-    return this.rollService.getRolls().sort((a, b) => b.date_loaded.getTime() - a.date_loaded.getTime())
+    this.rollService.getRolls().subscribe((data: Roll[]) => {
+      data.map(roll => roll.date_loaded = new Date(roll.date_loaded));
+      this.rolls = data.sort((a, b) => b.date_loaded < a.date_loaded ? 0 : 1);
+    })
   }
 
   changeSelectedCamera(camera)
@@ -62,12 +65,18 @@ export class NewRollComponent implements OnInit {
       brand: rollData.brand,
       width: rollData.width,
       iso: Number(rollData.iso),
-      camera_id: Number(rollData.camera.id),
+      camera_id: rollData.camera.id,
       date_loaded: new Date(rollData.date_loaded)
     } as Roll;
 
-    this.rollService.addRoll(roll);
-    this.rolls = this.getRollsDateSorted();
+    this.rollService.addRoll(roll).subscribe((res) => {
+      if(res.id && res.id !== null && res.id !== "")
+      {
+        console.log("Roll Added Successfully");
+      }
+      this.getRollsDateSorted();
+    });
+
 
   }
 

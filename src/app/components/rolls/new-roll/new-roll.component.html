@@ -56,6 +56,6 @@
 <h3>Roll History</h3>
 <div *ngFor="let roll of rolls; index as i">
     <a [title]="roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded" (click)="loadPreviousRoll(roll)">
-      {{roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded.toLocaleString('en-NZ')}}
+      {{roll.manufacturer + ' ' + roll.brand + ' ' + roll.iso + ' ' + roll.date_loaded.toLocaleDateString("en-NZ") }}
     </a>
 </div>

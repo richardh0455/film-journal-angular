@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
 import { shots } from '../../dummydata/dummyshots';
 import {Shot} from '../../interfaces/shot';
-import {LensService} from '../lens/lens.service';
+import {Response} from '../../interfaces/response';
+import { HttpClient, HttpParams  } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { environment } from './../../../environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ShotService {
-  constructor(private lensService: LensService) { }
+  constructor(private http: HttpClient) { }
 
-  getShots(): Shot[] {
-    return shots.map(shot => ({
-      id: Number(shot.id),
-      roll_id: Number(shot.roll_id),
-      aperture: Number(shot.aperture),
-      shutter_speed: Number(shot.shutter_speed),
-      lighting: shot.lighting,
-      date_time: new Date(shot.date_time),
-      location: shot.location,
-      description: shot.description,
-      lens_id: Number(shot.lens_id),
-    }) as Shot);
+  getShots(rollID: string): Observable<Shot[]> {
+    let params = new HttpParams().set('rollID', rollID);
+    return this.http.get<Shot[]>(environment.apiURL+"/shots", {params: params});
   }
 
-  addShot(shot : Shot){
-    var id = Math.max.apply(Math, this.getShots().map(function(shot) { return shot.id; })) + 1;
+  addShot(shot : Shot): Observable<Response> {
+    return this.http.post<Response>(environment.apiURL+"/shots", shot);
+    /*var id = Math.max.apply(Math, this.getShots().map(function(shot) { return shot.id; })) + 1;
     shots.push({
       id: String(id),
       roll_id: String(shot.roll_id),
@@ -36,6 +34,6 @@ export class ShotService {
       lens_id: String(shot.lens_id),
     });
     console.log("Shots in DB:")
-    console.log(this.getShots());
+    console.log(this.getShots());*/
   }
 }

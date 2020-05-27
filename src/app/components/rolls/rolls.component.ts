@@ -13,8 +13,17 @@ export class RollsComponent implements OnInit {
   rolls: Roll[];
   cameras: Camera[];
   constructor(private rollService: RollService, private cameraService: CameraService) {
-    this.rolls =  this.rollService.getRolls() as Roll[];
-    this.cameras = this.cameraService.getCameras() as Camera[];
+    this.rollService.getRolls().subscribe((data: Roll[]) => {
+      data.forEach(roll => {
+        var date = new Date(roll.date_loaded);
+        roll.formatted_date_loaded = typeof(date) !== "undefined" ? date.toLocaleDateString("en-NZ") : '';
+      });
+      this.rolls = data;
+    });
+    this.cameraService.getCameras().subscribe((data: Camera[]) => {
+      this.cameras = data;
+    });
+
   }
 
   ngOnInit(): void {

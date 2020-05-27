@@ -1,25 +1,29 @@
 import { Injectable } from '@angular/core';
 import {lenses} from '../../dummydata/dummylenses';
 import {Lens} from '../../interfaces/lens';
+import {Response} from '../../interfaces/response';
+import { HttpClient, HttpParams  } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { environment } from './../../../environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LensService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getLenses(): Lens[] {
-    return lenses.map(lens => ({
-      id: Number(lens.id),
-      manufacturer: lens.manufacturer,
-      width: lens.width,
-      aperture: lens.aperture,
-      mounting: lens.mounting,
-    }) as Lens);
+  getLenses(): Observable<Lens[]> {
+    return this.http.get<Lens[]>(environment.apiURL+"/lenses");
   }
 
-  getLens(lensId: number): Lens {
-    return this.getLenses().find(lens => lens.id === lensId);
+  getLens(lensId: number): Observable<Lens> {
+    return this.http.get<Lens>(environment.apiURL+`/lenses/${lensId}`);
+  }
+
+  addLens(lens : Lens): Observable<Response> {
+    return this.http.post<Response>(environment.apiURL+"/lenses", lens);
   }
 }

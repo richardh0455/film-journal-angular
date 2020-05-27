@@ -8,4 +8,5 @@ export interface Roll {
   width: string;
   camera_id: number;
   date_loaded: Date;
+  formatted_date_loaded: string;
 }

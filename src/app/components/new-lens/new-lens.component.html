@@ -1,0 +1,33 @@
+<form [formGroup]="newLensForm" (ngSubmit)="onSubmit(newLensForm.value)">
+  <div>
+    <label for="manufacturer">
+      Manufacturer
+    </label>
+    <input id="manufacturer" type="text" formControlName="manufacturer">
+  </div>
+
+  <div>
+    <label for="width">
+      Width
+    </label>
+    <input id="width" type="text" formControlName="width">
+  </div>
+
+  <div>
+    <label for="aperture">
+      Aperture
+    </label>
+    <input id="aperture" type="text" formControlName="aperture">
+  </div>
+
+  <div>
+    <label for="mounting">
+      Mounting
+    </label>
+    <input id="mounting" type="text" formControlName="mounting">
+  </div>
+
+
+  <button class="button" type="submit">Add New Lens</button>
+
+</form>

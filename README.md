@@ -1,4 +1,6 @@
-# FilmJournalAngular
+# Film Journal - Angular
+This is an Angular Webapp for journaling my photography experiments - Each shot has an Aperture and Shutter speed setting, and each roll of film has an ISO setting that determines the exposure of the film. Cameras can also have different lenses, 
+and there can be different lighting effects for different times of the day. All of this is recorded in a Firebase NoSQL database, via an API (see https://github.com/richardh0455/film-journal-api) 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
 

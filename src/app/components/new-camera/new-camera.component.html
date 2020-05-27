@@ -1,0 +1,41 @@
+<form [formGroup]="newCameraForm" (ngSubmit)="onSubmit(newCameraForm.value)">
+  <div>
+    <label for="manufacturer">
+      Manufacturer
+    </label>
+    <input id="manufacturer" type="text" formControlName="manufacturer">
+  </div>
+  <div>
+    <label for="brand">
+      Brand
+    </label>
+    <input id="brand" type="text" formControlName="brand">
+  </div>
+  <div>
+    <label for="model_number">
+      Model Number
+    </label>
+    <input id="model_number" type="text" formControlName="model_number">
+  </div>
+  <div>
+    <label for="lens_mounting">
+      Lens Mounting
+    </label>
+    <input id="lens_mounting" type="text" formControlName="lens_mounting">
+  </div>
+  <div>
+    <label for="film">
+      Film
+    </label>
+    <input id="film" type="text" formControlName="film">
+  </div>
+  <div>
+    <label for="style">
+      Style
+    </label>
+    <input id="style" type="text" formControlName="style">
+  </div>
+
+  <button class="button" type="submit">Add New Camera</button>
+
+</form>

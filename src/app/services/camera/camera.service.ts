@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
 import {cameras} from '../../dummydata/dummycameras';
 import {Camera} from '../../interfaces/camera';
+import {Response} from '../../interfaces/response';
+import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { environment } from './../../../environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CameraService {
 
-  constructor() { }
-  getCameras(): Camera[] {
-    return cameras.map(camera => ({
-      id: Number(camera.id),
-      manufacturer: camera.manufacturer,
-      brand: camera.brand,
-      model_number: camera.model_number,
-      lens_mounting: camera.lens_mounting,
-      film: camera.film,
-      style: camera.style,
-    }) as Camera);
+  constructor(private http: HttpClient) { }
+  getCameras(): Observable<Camera[]> {
+    return this.http.get<Camera[]>(environment.apiURL+"/cameras");
   }
 
-  getCamera(cameraID: number): Camera {
-    return this.getCameras().find(camera => camera.id === cameraID);
+  getCamera(cameraID: number): Observable<Camera> {
+    return this.http.get<Camera>(environment.apiURL+`/cameras/${cameraID}`);
+  }
+
+  addCamera(camera : Camera): Observable<Response> {
+    return this.http.post<Response>(environment.apiURL+"/cameras", camera);
   }
 }
