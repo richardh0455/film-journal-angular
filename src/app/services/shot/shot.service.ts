@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { shots } from '../../dummydata/dummyshots';
 import {Shot} from '../../interfaces/shot';
+import {Response} from '../../interfaces/response';
 import { HttpClient, HttpParams  } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
@@ -18,8 +19,8 @@ export class ShotService {
     return this.http.get<Shot[]>(environment.apiURL+"/shots", {params: params});
   }
 
-  addShot(shot : Shot): Observable {
-    return this.http.post(environment.apiURL+"/shots", shot);
+  addShot(shot : Shot): Observable<Response> {
+    return this.http.post<Response>(environment.apiURL+"/shots", shot);
     /*var id = Math.max.apply(Math, this.getShots().map(function(shot) { return shot.id; })) + 1;
     shots.push({
       id: String(id),

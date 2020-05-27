@@ -41,7 +41,7 @@ export class ShotsComponent implements OnInit {
     this.shotService.getShots(this.rollId).subscribe((data : Shot[]) => {
       this.shots = data;
       this.shots.forEach(shot => {
-        shot.lens = {};
+        shot.lens = null;
         var date = new Date(shot.date_time);
         shot.formatted_date_time = typeof(date) !== "undefined" ? date.toLocaleDateString("en-NZ") : '';
       });

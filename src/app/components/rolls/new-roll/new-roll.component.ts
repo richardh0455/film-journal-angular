@@ -37,7 +37,7 @@ export class NewRollComponent implements OnInit {
   {
     this.rollService.getRolls().subscribe((data: Roll[]) => {
       data.map(roll => roll.date_loaded = new Date(roll.date_loaded));
-      this.rolls = data.sort((a, b) => b.date_loaded - a.date_loaded);
+      this.rolls = data.sort((a, b) => b.date_loaded < a.date_loaded ? 0 : 1);
     })
   }
 
